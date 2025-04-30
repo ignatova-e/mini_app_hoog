@@ -180,3 +180,32 @@ h1 {
     /* оранжевый */
     color: #ff9800;
 }
+
+/* Строка с выбором тегов длля фильтра (скролл) */
+.tag-filter {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.tag-filter::-webkit-scrollbar {
+    display: none;
+    /* убираем скроллбар */
+}
+
+.tag-filter .tag-button {
+    background-color: #eee;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.tag-filter .tag-button.active {
+    background-color: #0088cc;
+    color: white;
+}

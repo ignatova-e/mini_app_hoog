@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredItems.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
-            const tags = item.tags || [];  // если теги не указаны, создаем пустой массив
+            const tags = item.tags || [];
             const tagsHTML = tags.map(tag => `<span class="tag tag-${tag}">${tag}</span>`).join(' ');
 
             card.innerHTML = `
@@ -53,6 +53,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         displayCards(filteredKnowledgeBase);
     });
+
+    // === ФИЛЬТР ПО ТЕГАМ ===
+    const tagFilterContainer = document.getElementById("tagFilter");
+
+    const uniqueTags = [...new Set(knowledgeBase.flatMap(item => item.tags || []))];
+
+    uniqueTags.forEach(tag => {
+        const btn = document.createElement("button");
+        btn.className = "tag-button";
+        btn.textContent = tag;
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".tag-button").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const filtered = knowledgeBase.filter(item => (item.tags || []).includes(tag));
+            displayCards(filtered);
+        });
+        tagFilterContainer.appendChild(btn);
+    });
+
+    const resetBtn = document.createElement("button");
+    resetBtn.className = "tag-button";
+    resetBtn.textContent = "Показать все";
+    resetBtn.addEventListener("click", () => {
+        document.querySelectorAll(".tag-button").forEach(b => b.classList.remove("active"));
+        displayCards(knowledgeBase);
+    });
+    tagFilterContainer.prepend(resetBtn);
 
     // Первичная отрисовка
     displayCards(knowledgeBase);
