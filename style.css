@@ -1,52 +1,92 @@
+:root {
+    --card-radius: 16px;
+    --card-padding: 16px;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --bg-color: #ffffff;
+    --text-color: #1c1c1e;
+    --subtext-color: #6e6e73;
+    --accent-color: #0088cc;
+    --font-size-base: 16px;
+}
+
 body {
-    font-family: sans-serif;
-    background: #f8f9fa;
     margin: 0;
     padding: 20px;
+    background-color: #f2f3f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--font-size-base);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
+h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 24px;
+    color: var(--text-color);
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+#card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-.section-button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 16px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+/* Карточка ответа */
+.card {
+    background-color: var(--bg-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: var(--card-padding);
+    transition: transform 0.2s ease, background-color 0.3s;
     cursor: pointer;
-    text-align: left;
+    border: 1px solid #e3e4e8;
 }
 
-.section-button:hover {
-    background: #e9ecef;
+.card:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.01);
 }
 
-.article {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 15px;
-    margin-bottom: 10px;
+.card h3 {
+    margin: 0 0 6px;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
-.article h3 {
-    margin-top: 0;
+.card p {
+    margin: 0;
+    font-size: 0.95em;
+    color: var(--subtext-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .card h3 {
+        font-size: 1em;
+    }
+
+    .card p {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 12px;
+    }
 }

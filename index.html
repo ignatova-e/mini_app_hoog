@@ -2,23 +2,19 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>База знаний</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>📚 База знаний</h1>
 
-        <input type="text" id="search" placeholder="Поиск по статьям..." />
+    <h2>База знаний</h2>
+    <div id="card-container"></div> <!-- id совпадает! -->
 
-        <div id="sections"></div>
-        <div id="articles"></div>
-    </div>
-
+    <!-- Подключаем JS файлы в правильном порядке -->
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
