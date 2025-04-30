@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredItems.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
-            const tagsHTML = item.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
+            const tags = item.tags || [];  // если теги не указаны, создаем пустой массив
+            const tagsHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
 
             card.innerHTML = `
                 <h3>${item.title}</h3>
