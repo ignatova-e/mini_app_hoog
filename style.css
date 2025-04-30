@@ -1,59 +1,92 @@
+:root {
+    --card-radius: 16px;
+    --card-padding: 16px;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --bg-color: #ffffff;
+    --text-color: #1c1c1e;
+    --subtext-color: #6e6e73;
+    --accent-color: #0088cc;
+    --font-size-base: 16px;
+}
+
 body {
-    font-family: sans-serif;
     margin: 0;
-    padding: 16px;
-    background-color: #f7f7f7;
-    line-height: 1.5;
-    font-size: 16px;
+    padding: 20px;
+    background-color: #f2f3f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--font-size-base);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 h2 {
-    font-size: 1.8em;
-    margin-bottom: 16px;
     text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 24px;
+    color: var(--text-color);
 }
 
+#card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Карточка ответа */
 .card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
+    background-color: var(--bg-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: var(--card-padding);
+    transition: transform 0.2s ease, background-color 0.3s;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e3e4e8;
 }
 
 .card:hover {
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
+    transform: scale(1.01);
 }
 
 .card h3 {
-    font-size: 1.2em;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
 .card p {
     margin: 0;
     font-size: 0.95em;
+    color: var(--subtext-color);
 }
 
-/* 📱 Адаптивность для телефонов */
-@media (max-width: 600px) {
+/* Адаптивность */
+@media (max-width: 768px) {
     body {
         padding: 12px;
         font-size: 15px;
     }
 
     .card {
-        padding: 12px;
+        padding: 14px;
     }
 
     .card h3 {
-        font-size: 1.1em;
+        font-size: 1em;
     }
 
     .card p {
         font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 12px;
     }
 }
