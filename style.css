@@ -1,5 +1,6 @@
 :root {
     --card-radius: 16px;
+    /* Радиус закругления углов карточек */
     --card-padding: 16px;
     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     --bg-color: #ffffff;
@@ -28,31 +29,35 @@ h2 {
 
 #card-container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     /* Карточки будут переноситься на новую строку при необходимости */
     gap: 16px;
+    /* Промежутки между карточками */
     justify-content: space-between;
-    /* Для равномерного распределения карточек */
+    /* Равномерное распределение карточек */
+    margin-top: 20px;
+    /* Добавляем отступ сверху */
 }
 
 .card {
+    width: 300px;
+    /* Фиксированная ширина карточки */
+    height: 220px;
+    /* Фиксированная высота карточки */
     padding: 15px;
-    margin: 10px 0;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: var(--card-radius);
+    /* Закругленные углы */
     box-shadow: var(--card-shadow);
     transition: transform 0.2s ease, background-color 0.3s;
     cursor: pointer;
-    width: 30%;
-    /* Карточки будут занимать 30% ширины контейнера */
     box-sizing: border-box;
 }
 
 .card:hover {
     background-color: #f1f1f1;
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 .card h3 {
@@ -71,6 +76,8 @@ h2 {
     .card {
         width: 48%;
         /* На экранах до 768px карточки занимают 48% ширины */
+        height: auto;
+        /* Высота автоматически подстраивается под контент */
     }
 }
 
@@ -78,6 +85,8 @@ h2 {
     .card {
         width: 100%;
         /* На мобильных устройствах карточки занимают всю ширину */
+        height: auto;
+        /* Высота автоматически подстраивается под контент */
     }
 }
 
