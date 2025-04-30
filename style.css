@@ -139,32 +139,44 @@ h1 {
 }
 
 /* Можно добавить разные цвета тегам */
-.tag-Учет {
+.tag-flowwow {
+    background-color: rgba(255, 127, 80, 0.15);
+    /* коралловый */
+    color: #ff7f50;
+}
+
+.tag-uchet {
     background-color: rgba(0, 136, 204, 0.1);
+    /* голубой */
     color: #0088cc;
 }
 
-.tag-Flowwow {
-    background-color: rgba(255, 127, 80, 0.15);
-    color: #ff5e3a;
+.tag-roli {
+    background-color: rgba(255, 235, 59, 0.15);
+    /* желтый */
+    color: #fbc02d;
 }
 
-.tag-Роли {
-    background-color: rgba(255, 235, 59, 0.2);
-    color: #d4aa00;
+.tag-spisaniya {
+    background-color: rgba(103, 58, 183, 0.1);
+    /* фиолетовый */
+    color: #673ab7;
 }
 
-.tag-Списания {
+.tag-postavki {
+    background-color: rgba(0, 188, 212, 0.1);
+    /* бирюзовый */
+    color: #00bcd4;
+}
+
+.tag-inventarizatsiya {
     background-color: rgba(76, 175, 80, 0.1);
+    /* зеленый */
     color: #4caf50;
 }
 
-.tag-Roadmap {
-    background-color: rgba(156, 39, 176, 0.1);
-    color: #9c27b0;
-}
-
-.tag-default {
-    background-color: rgba(200, 200, 200, 0.15);
-    color: #666;
+.tag-sotrudniki {
+    background-color: rgba(255, 152, 0, 0.1);
+    /* оранжевый */
+    color: #ff9800;
 }

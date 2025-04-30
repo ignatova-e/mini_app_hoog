@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = "card";
             const tags = item.tags || [];  // если теги не указаны, создаем пустой массив
             const safeClassName = tag => 'tag-' + tag.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-_]/g, '');
-            const tagsHTML = tags.map(tag => `<span class="tag ${safeClassName(tag)}">${tag}</span>`).join(' ');
+            const translit = (text) => text.toLowerCase().replace(/[^a-z0-9]/gi, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const tagsHTML = tags.map(tag => `<span class="tag tag-${translit(tag)}">${tag}</span>`).join(' ');
 
             card.innerHTML = `
                 <h3>${item.title}</h3>
