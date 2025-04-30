@@ -8,7 +8,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [KeyboardButton("База знаний", web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/"))]
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
-    await update.message.reply_text("Привет! Если возникли вопросы по приложению, тебе поможет наша база знаний📚 \n Нажми кнопку ниже! ", reply_markup=reply_markup)
+    await update.message.reply_text("Привет! Если возникли вопросы по приложению, тебе поможет наша база знаний📚 \nНажми кнопку ниже! ", reply_markup=reply_markup)
 
 def main():
     app = Application.builder().token(TOKEN).build()
