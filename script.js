@@ -29,6 +29,12 @@ const searchInput = document.getElementById("searchInput");
 function displayCards(filteredItems) {
     container.innerHTML = ''; // Очищаем контейнер перед выводом новых данных
 
+    // Если нет результатов поиска, выводим сообщение
+    if (filteredItems.length === 0) {
+        container.innerHTML = '<p>Нет результатов для вашего запроса.</p>';
+    }
+
+    // Отображаем карточки
     filteredItems.forEach(item => {
         const card = document.createElement("div");
         card.className = "card";
