@@ -1,56 +1,55 @@
-console.log(knowledgeBase);  // Печатает данные в консоль, чтобы убедиться, что они загружены
+console.log(knowledgeBase);  // Проверим, загружены ли данные
 
-const container = document.getElementById("card-container");
-const searchInput = document.getElementById("searchInput");
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById("card-container");
+    const searchInput = document.getElementById("searchInput");
 
-// Функция для фильтрации и отображения карточек
-function displayCards(filteredItems) {
-    container.innerHTML = ''; // Очищаем контейнер перед выводом новых данных
+    function displayCards(filteredItems) {
+        container.innerHTML = '';
 
-    // Если нет результатов поиска, выводим сообщение
-    if (filteredItems.length === 0) {
-        container.innerHTML = '<p>Нет результатов для вашего запроса.</p>';
+        if (filteredItems.length === 0) {
+            container.innerHTML = '<p>Нет результатов для вашего запроса.</p>';
+            return;
+        }
+
+        filteredItems.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+            `;
+
+            card.addEventListener('click', () => {
+                console.log(`Открытие карточки: ${item.title}`);
+                Swal.fire({
+                    title: item.title,
+                    html: `
+                        <img src="${item.image}" alt="${item.title}" class="modal-image" />
+                        <p>${item.content}</p>
+                    `,
+                    confirmButtonText: 'ОК'
+                });
+            });
+
+            container.appendChild(card);
+        });
     }
 
-    // Отображаем карточки
-    filteredItems.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-        `;
-
-        // Обработчик клика
-        card.addEventListener('click', () => {
-            console.log("Карточка нажата:", item.title);  // Выводим название карточки в консоль
-            Swal.fire({
-                title: item.title,
-                html: `
-                    <img src="${item.image}" alt="${item.title}" class="modal-image" />
-                    <p>${item.content}</p>
-                `,
-                confirmButtonText: 'ОК'
-            });
+    // Поиск
+    searchInput.addEventListener('input', (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredKnowledgeBase = knowledgeBase.filter(item => {
+            return (
+                item.title.toLowerCase().includes(searchTerm) ||
+                item.description.toLowerCase().includes(searchTerm) ||
+                item.content.toLowerCase().includes(searchTerm)
+            );
         });
 
-        container.appendChild(card);
-    });
-}
-
-// Фильтрация по запросу в поле поиска
-searchInput.addEventListener('input', (event) => {
-    const searchTerm = event.target.value.toLowerCase(); // Получаем введенный запрос
-    const filteredKnowledgeBase = knowledgeBase.filter(item => {
-        return (
-            item.title.toLowerCase().includes(searchTerm) ||
-            item.description.toLowerCase().includes(searchTerm) ||
-            item.content.toLowerCase().includes(searchTerm)
-        );
+        displayCards(filteredKnowledgeBase);
     });
 
-    displayCards(filteredKnowledgeBase); // Показываем отфильтрованные статьи
+    // Первичная отрисовка
+    displayCards(knowledgeBase);
 });
-
-// Изначально выводим все карточки
-displayCards(knowledgeBase);
