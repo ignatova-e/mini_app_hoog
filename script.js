@@ -1,3 +1,5 @@
+console.log(knowledgeBase);  // Печатает данные в консоль, чтобы убедиться, что они загружены
+
 const container = document.getElementById("card-container");
 const searchInput = document.getElementById("searchInput");
 
@@ -21,6 +23,7 @@ function displayCards(filteredItems) {
 
         // Обработчик клика
         card.addEventListener('click', () => {
+            console.log("Карточка нажата:", item.title);  // Выводим название карточки в консоль
             Swal.fire({
                 title: item.title,
                 html: `
