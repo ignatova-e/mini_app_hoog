@@ -1,25 +1,59 @@
 body {
+    font-family: sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    padding: 16px;
+    background-color: #f7f7f7;
+    line-height: 1.5;
+    font-size: 16px;
 }
-.container {
-    padding: 20px;
-}
-h1 {
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 16px;
     text-align: center;
-    margin-bottom: 20px;
 }
+
 .card {
     background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 12px;
     padding: 16px;
-    margin: 10px 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 12px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
 .card:hover {
-    transform: scale(1.02);
+    background-color: #f0f0f0;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin: 0 0 8px 0;
+}
+
+.card p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+/* 📱 Адаптивность для телефонов */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card h3 {
+        font-size: 1.1em;
+    }
+
+    .card p {
+        font-size: 0.9em;
+    }
 }
