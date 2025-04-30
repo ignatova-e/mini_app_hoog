@@ -28,30 +28,30 @@ h2 {
 
 #card-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* Карточки будут переноситься на новую строку при необходимости */
     gap: 16px;
+    justify-content: space-between;
+    /* Для равномерного распределения карточек */
 }
 
-/* Стиль карточек ответа */
 .card {
     padding: 15px;
     margin: 10px 0;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-
-    /* background-color: var(--bg-color); */
-    /* border-radius: var(--card-radius); */
     box-shadow: var(--card-shadow);
-    /* padding: var(--card-padding); */
     transition: transform 0.2s ease, background-color 0.3s;
     cursor: pointer;
-    /* border: 1px solid #e3e4e8; */
+    width: 30%;
+    /* Карточки будут занимать 30% ширины контейнера */
+    box-sizing: border-box;
 }
 
 .card:hover {
     background-color: #f1f1f1;
-    /* background-color: #f9f9f9; */
     transform: scale(1.01);
 }
 
@@ -67,45 +67,28 @@ h2 {
     color: var(--subtext-color);
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
-    body {
-        padding: 12px;
-        font-size: 15px;
-    }
-
     .card {
-        padding: 14px;
-    }
-
-    .card h3 {
-        font-size: 1em;
-    }
-
-    .card p {
-        font-size: 0.9em;
+        width: 48%;
+        /* На экранах до 768px карточки занимают 48% ширины */
     }
 }
 
 @media (max-width: 480px) {
-    h2 {
-        font-size: 1.5em;
-    }
-
     .card {
-        padding: 12px;
-        border-radius: 12px;
+        width: 100%;
+        /* На мобильных устройствах карточки занимают всю ширину */
     }
 }
 
-@media (max-width: 768px) {
-    .modal-image {
-        max-width: 100%;
-        /* Для экранов меньше 768px */
-    }
+.modal-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    /* Центрирование */
 }
 
-/* Стиль для заголовка "База знаний" */
 h1 {
     text-align: center;
     font-size: 2rem;
@@ -113,7 +96,6 @@ h1 {
     color: #333;
 }
 
-/* Поле поиска */
 #searchInput {
     width: 100%;
     max-width: 400px;
@@ -124,20 +106,4 @@ h1 {
     font-size: 16px;
     display: block;
     box-sizing: border-box;
-}
-
-/* Для изображений в модальном окне */
-.modal-image {
-    max-width: 100%;
-    height: auto;
-
-    /* width: 100%;
-    max-width: 400px;*/
-    /* Максимальная ширина */
-    /* height: auto;
-    display: block;
-    margin: 0 auto; */
-
-    /* Центрируем изображение
-    margin-bottom: 10px; */
 }
