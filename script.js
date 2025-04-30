@@ -18,7 +18,9 @@ function displayCards(filteredItems) {
             <h3>${item.title}</h3>
             <p>${item.description}</p>
         `;
-        card.onclick = () => {
+
+        // Обработчик клика
+        card.addEventListener('click', () => {
             Swal.fire({
                 title: item.title,
                 html: `
@@ -27,7 +29,8 @@ function displayCards(filteredItems) {
                 `,
                 confirmButtonText: 'ОК'
             });
-        };
+        });
+
         container.appendChild(card);
     });
 }
