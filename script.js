@@ -15,9 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         filteredItems.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
+            const tagsHTML = item.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ');
+
             card.innerHTML = `
                 <h3>${item.title}</h3>
                 <p>${item.description}</p>
+                <div class="tags">${tagsHTML}</div>
             `;
 
             card.addEventListener('click', () => {
