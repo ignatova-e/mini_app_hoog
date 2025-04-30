@@ -1,4 +1,4 @@
-const container = document.getElementById("card-container"); // ← как у тебя
+const container = document.getElementById("card-container");
 
 knowledgeBase.forEach(item => {
     const card = document.createElement("div");
