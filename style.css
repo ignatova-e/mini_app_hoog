@@ -48,6 +48,13 @@ h2 {
     transform: scale(1.01);
 }
 
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
 .card h3 {
     margin: 0 0 6px;
     font-size: 1.1em;
