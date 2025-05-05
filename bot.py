@@ -12,12 +12,12 @@ CHANNEL_ID = "@testtestt23e"  # Ваш канал
 async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
-        keyboard = [[
-            InlineKeyboardButton(
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton(
                 "📚 База знаний", 
-                web_app=WebAppInfo(url="https://yourwebsite.com/your_app_path")
-            )
-        ]]
+                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
+            )]
+        ])
 
         # Отправляем сообщение в канал и закрепляем его
         sent_msg = await context.bot.send_message(
@@ -34,13 +34,16 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
+        # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
         keyboard = [[
             InlineKeyboardButton(
                 "📚 База знаний", 
-                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")  # Заменить на URL твоего мини-приложения
+                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
             )
         ]]
         reply_markup = InlineKeyboardMarkup(keyboard)
+
+        # Отправляем сообщение с кнопкой в личку
         await update.message.reply_text(
             "Салют, мой дорогой Незнайка! 🤗\nСпециально для тебя мы подготовили базу знаний по приложению, чекай кнопку ниже ⬇️",
             reply_markup=reply_markup
@@ -57,8 +60,8 @@ def main():
     # Подключаем команду /start
     app.add_handler(CommandHandler("start", start)) 
 
-    # Добавляем команду для отправки и закрепления сообщения на канале
-    app.add_handler(CommandHandler("pin", send_and_pin)) 
+    # Подключаем команду /pin
+    app.add_handler(CommandHandler("pin", send_and_pin))
 
     # Запуск бота
     app.run_polling()
