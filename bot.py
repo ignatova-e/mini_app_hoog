@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update
 
 TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
-CHANNEL_ID = "@testtestt23e"  # Убедитесь, что канал указан корректно и бот является администратором канала
+CHANNEL_ID = "testtestt23e"  # Убедитесь, что канал указан корректно и бот является администратором канала
 
 # Функция для отправки и закрепления сообщения с кнопкой на канале
 async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -27,12 +27,14 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=keyboard
         )
 
+        # Закрепляем сообщение
         await context.bot.pin_chat_message(chat_id=CHANNEL_ID, message_id=sent_msg.message_id)
         print("Сообщение отправлено и закреплено в канале")
 
     except Exception as e:
+        # Добавим более подробную информацию об ошибке для диагностики
         print(f"Ошибка при отправке сообщения: {e}")
-        await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение в канал.")
+        await update.message.reply_text(f"Что-то пошло не так при попытке отправить сообщение в канал. Ошибка: {e}")
 
 # Основная функция для запуска бота
 def main():
