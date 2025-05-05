@@ -1,7 +1,7 @@
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update, WebAppInfo, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
-TOKEN = "твой_токен_бота"
+TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
 
 
 # /start — кнопка в личку
