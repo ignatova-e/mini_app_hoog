@@ -134,8 +134,22 @@ window.addEventListener("DOMContentLoaded", () => {
         Telegram.WebApp.ready(); // Инициализация WebApp
         Telegram.WebApp.expand(); // Разворачиваем WebApp
 
-        const startParam = Telegram.WebApp.initDataUnsafe?.start_param;
+        const startParam = Telegram.WebApp.initDataUnsafe.start_param;
 
+        console.log("Получен start_param:", startParam);
+
+        // ПАРСИМ start_param из URL, если Telegram.WebApp.initDataUnsafe пустой
+        let startParam;
+        if (
+            Telegram &&
+            Telegram.WebApp &&
+            Telegram.WebApp.initDataUnsafe.start_param
+        ) {
+            startParam = Telegram.WebApp.initDataUnsafe.start_param;
+        } else {
+            const urlParams = new URLSearchParams(window.location.search);
+            startParam = urlParams.get("start_param");
+        }
         console.log("Получен start_param:", startParam);
 
         if (startParam === "1") {
