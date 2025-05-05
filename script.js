@@ -153,7 +153,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (startParam === "1") {
             // Выполняем действия в зависимости от параметра
             console.log("Применяем действия для start_param = 1");
-            activeTag = "exampleTag"; // Например, применяем фильтр по тегу
+            // activeTag = "exampleTag"; // Например, применяем фильтр по тегу
             filterAndSearch();
         } else {
             console.log(
