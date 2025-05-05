@@ -151,11 +151,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // Ваш код для обработки start_param
         if (startParam === "1") {
-            console.log("Применяем действия для start_param = 1");
+            console.log("Открываем приложение для start_param = 1");
 
-            // Здесь можно просто показать все карточки (если фильтрация не требуется)
-            activeTag = null; // Убираем фильтры
-            filterAndSearch(); // Показать все карточки
+            Telegram.WebApp.expand();
         } else {
             console.log(
                 "Не найден нужный параметр start_param или параметр имеет другое значение",
