@@ -112,24 +112,48 @@ function filterAndSearch() {
     displayCards(filtered);
 }
 
-// Инициализация тегов
-const uniqueTags = [
-    ...new Set(knowledgeBase.flatMap((item) => item.tags || [])),
-];
+// Загрузка карточек и инициализация
+window.addEventListener("DOMContentLoaded", () => {
+    displayCards(knowledgeBase);
 
-uniqueTags.forEach((tag) => {
-    const btn = document.createElement("button");
-    btn.className = "tag-button";
-    btn.textContent = tag;
-    btn.addEventListener("click", () => {
-        document
-            .querySelectorAll(".tag-button")
-            .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeTag = tag;
-        filterAndSearch();
+    // Инициализация тегов
+    const uniqueTags = [
+        ...new Set(knowledgeBase.flatMap((item) => item.tags || [])),
+    ];
+
+    uniqueTags.forEach((tag) => {
+        const btn = document.createElement("button");
+        btn.className = "tag-button";
+        btn.textContent = tag;
+        btn.addEventListener("click", () => {
+            document
+                .querySelectorAll(".tag-button")
+                .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeTag = tag;
+            filterAndSearch();
+        });
+        tagFilterContainer.appendChild(btn);
     });
-    tagFilterContainer.appendChild(btn);
+
+    // Обработка start_param после загрузки страницы и тегов
+    if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
+        const startParam = Telegram.WebApp.initDataUnsafe.start_param;
+        console.log("Получен start_param:", startParam);
+
+        if (startParam) {
+            activeTag = startParam; // допустим, ты передаешь прямо имя тега
+            filterAndSearch();
+
+            const tagBtn = [...document.querySelectorAll(".tag-button")].find(
+                (btn) => btn.textContent === activeTag,
+            );
+            if (tagBtn) tagBtn.classList.add("active");
+        }
+
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+    }
 });
 
 // Сброс фильтров
@@ -144,30 +168,3 @@ resetBtn.addEventListener("click", () => {
 
 // Поиск при вводе
 searchInput.addEventListener("input", filterAndSearch);
-
-// Telegram WebApp
-if (window.Telegram && Telegram.WebApp) {
-    Telegram.WebApp.ready();
-    const startParam = Telegram.WebApp.initDataUnsafe.start_param;
-    console.log("Получен start_param:", startParam);
-
-    // Пример действия на основе параметра:
-    if (startParam === "1") {
-        // Автоматически выбираем нужный тег, фильтруем карточки
-        activeTag = "exampleTag"; // замени на тег, который ты хочешь показать
-        filterAndSearch();
-
-        // Можно также выделить кнопку тега, если нужно
-        const tagBtn = [...document.querySelectorAll(".tag-button")].find(
-            (btn) => btn.textContent === activeTag,
-        );
-        if (tagBtn) tagBtn.classList.add("active");
-    }
-
-    Telegram.WebApp.expand();
-}
-
-// Загрузка карточек
-window.addEventListener("DOMContentLoaded", () => {
-    displayCards(knowledgeBase);
-});
