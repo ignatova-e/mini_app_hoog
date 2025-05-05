@@ -15,7 +15,7 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                "📚 База знаний", 
+                text="📚 База знаний", 
                 web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")  # Убедитесь, что URL правильный
             )
         ]])
