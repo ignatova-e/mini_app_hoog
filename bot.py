@@ -34,16 +34,13 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
-        # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
         keyboard = [[
             InlineKeyboardButton(
-                "База знаний", 
-                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
+                "📚 База знаний", 
+                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")  # Заменить на URL твоего мини-приложения
             )
         ]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-
-        # Отправляем сообщение с кнопкой в личку
         await update.message.reply_text(
             "Салют, мой дорогой Незнайка! 🤗\nСпециально для тебя мы подготовили базу знаний по приложению, чекай кнопку ниже ⬇️",
             reply_markup=reply_markup
@@ -54,13 +51,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Основная функция для запуска бота
 def main():
+    # Создаем приложение с токеном
     app = Application.builder().token(TOKEN).build()
 
-    # Обработчики команд
-    app.add_handler(CommandHandler("start", start))  # Команда /start
-    app.add_handler(CommandHandler("pin", send_and_pin))  # Команда /pin
+    # Подключаем команду /start
+    app.add_handler(CommandHandler("start", start)) 
 
-    print("Бот запущен и ожидает команды...")
+    # Добавляем команду для отправки и закрепления сообщения на канале
+    app.add_handler(CommandHandler("pin", send_and_pin)) 
+
+    # Запуск бота
     app.run_polling()
 
 if __name__ == '__main__':

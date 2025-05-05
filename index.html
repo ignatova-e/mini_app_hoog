@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="ru">
     <head>
+        <script
+            async
+            src="https://telegram.org/js/telegram-web-app.js"
+        ></script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>База знаний</title>
@@ -34,5 +38,12 @@
         <!-- Подключение скриптов -->
         <script src="data.js"></script>
         <script src="script.js"></script>
+
+        <!-- Инициализация Telegram Web App -->
+        <script>
+            window.onload = function () {
+                Telegram.WebApp.init(); // Инициализация Web App
+            };
+        </script>
     </body>
 </html>
