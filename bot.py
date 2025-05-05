@@ -27,14 +27,12 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=keyboard
         )
 
-        # Закрепляем сообщение
         await context.bot.pin_chat_message(chat_id=CHANNEL_ID, message_id=sent_msg.message_id)
         print("Сообщение отправлено и закреплено в канале")
 
     except Exception as e:
-        # Добавим более подробную информацию об ошибке для диагностики
         print(f"Ошибка при отправке сообщения: {e}")
-        await update.message.reply_text(f"Что-то пошло не так при попытке отправить сообщение в канал. Ошибка: {e}")
+        await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение в канал.")
 
 # Основная функция для запуска бота
 def main():
