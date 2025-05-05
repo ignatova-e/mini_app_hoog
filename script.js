@@ -142,16 +142,23 @@ window.addEventListener("DOMContentLoaded", () => {
         const startParam = Telegram.WebApp.initDataUnsafe.start_param;
         console.log("Получен start_param:", startParam);
 
+        // Проверка значения параметра
+        if (startParam) {
+            console.log("start_param передан, его значение:", startParam);
+        } else {
+            console.log("start_param не был передан");
+        }
+
         // Ваш код для обработки start_param
         if (startParam === "1") {
-            // Применение фильтра или любых других данных
-            activeTag = "exampleTag"; // замените на нужный тег
+            // Выполняем действия в зависимости от параметра
+            console.log("Применяем действия для start_param = 1");
+            activeTag = "exampleTag"; // Например, применяем фильтр по тегу
             filterAndSearch();
-
-            const tagBtn = [...document.querySelectorAll(".tag-button")].find(
-                (btn) => btn.textContent === activeTag,
+        } else {
+            console.log(
+                "Не найден нужный параметр start_param или параметр имеет другое значение",
             );
-            if (tagBtn) tagBtn.classList.add("active");
         }
 
         Telegram.WebApp.expand();
