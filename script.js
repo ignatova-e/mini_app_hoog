@@ -67,7 +67,7 @@ function createCard(item) {
 }
 
 function displayCards(data) {
-    cardContainer.innerHTML = "";
+    cardContainer.innerHTML = ""; // Очистка контейнера карточек
 
     if (data.length === 0) {
         const message = document.createElement("p");
@@ -125,38 +125,19 @@ function initTags() {
     });
 }
 
-// Основная инициализация
 window.addEventListener("DOMContentLoaded", () => {
     displayCards(knowledgeBase);
     initTags();
 
-    if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready(); // Инициализация WebApp
-        Telegram.WebApp.expand(); // Разворачиваем WebApp
+    if (Telegram.WebApp) {
+        Telegram.WebApp.ready();
 
         const startParam = Telegram.WebApp.initDataUnsafe.start_param;
-
-        console.log("Получен start_param:", startParam);
-
-        // ПАРСИМ start_param из URL, если Telegram.WebApp.initDataUnsafe пустой
-        let startParam;
-        if (
-            Telegram &&
-            Telegram.WebApp &&
-            Telegram.WebApp.initDataUnsafe.start_param
-        ) {
-            startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        } else {
-            const urlParams = new URLSearchParams(window.location.search);
-            startParam = urlParams.get("start_param");
-        }
         console.log("Получен start_param:", startParam);
 
         if (startParam === "1") {
-            console.log("Применяем поведение для start_param = 1");
-            // Никаких фильтров — просто показ всех карточек
-            activeTag = null;
-            filterAndSearch();
+            console.log("Открываем приложение для start_param = 1");
+            Telegram.WebApp.expand();
         }
     }
 });
