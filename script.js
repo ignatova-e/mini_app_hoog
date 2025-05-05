@@ -1,10 +1,9 @@
-// Подключение к контейнерам
 const cardContainer = document.getElementById("card-container");
 const tagFilterContainer = document.getElementById("tag-filter");
 const searchInput = document.getElementById("search-input");
 const resetBtn = document.getElementById("reset-btn");
 
-let activeTag = null; // текущий выбранный тег
+let activeTag = null;
 
 function createCard(item) {
     const card = document.createElement("div");
@@ -13,14 +12,12 @@ function createCard(item) {
     const cardInner = document.createElement("div");
     cardInner.className = "card-inner";
 
-    // Передняя сторона
     const cardFront = document.createElement("div");
     cardFront.className = "card-front";
     const title = document.createElement("h2");
     title.textContent = item.title;
     cardFront.appendChild(title);
 
-    // Теги
     if (item.tags && item.tags.length > 0) {
         const tagContainer = document.createElement("div");
         tagContainer.className = "tags";
@@ -35,19 +32,16 @@ function createCard(item) {
         cardFront.appendChild(tagContainer);
     }
 
-    // Задняя сторона
     const cardBack = document.createElement("div");
     cardBack.className = "card-back";
     const content = document.createElement("p");
     content.textContent = item.description;
     cardBack.appendChild(content);
 
-    // Собираем
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
 
-    // Клик: поворот и модалка
     card.addEventListener("click", () => {
         card.classList.toggle("flipped");
 
@@ -62,7 +56,6 @@ function createCard(item) {
             confirmButtonText: "ОК",
         });
 
-        // Если используется Telegram Mini App
         if (window.Telegram && Telegram.WebApp) {
             Telegram.WebApp.sendData(
                 JSON.stringify({ selectedCard: item.title }),
@@ -89,7 +82,6 @@ function displayCards(data) {
     });
 }
 
-// Поиск + фильтрация по тегу
 function filterAndSearch() {
     const searchTerm = searchInput.value.toLowerCase();
     let filtered = knowledgeBase;
@@ -112,11 +104,7 @@ function filterAndSearch() {
     displayCards(filtered);
 }
 
-// Загрузка карточек и инициализация
-window.addEventListener("DOMContentLoaded", () => {
-    displayCards(knowledgeBase);
-
-    // Инициализация тегов
+function initTags() {
     const uniqueTags = [
         ...new Set(knowledgeBase.flatMap((item) => item.tags || [])),
     ];
@@ -135,29 +123,30 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         tagFilterContainer.appendChild(btn);
     });
+}
 
-    // Обработка start_param после загрузки страницы и тегов
+// Основная инициализация
+window.addEventListener("DOMContentLoaded", () => {
+    displayCards(knowledgeBase);
+    initTags();
+
     if (window.Telegram && Telegram.WebApp) {
-        console.log(Telegram.WebApp.initData);
-        Telegram.WebApp.ready(); // Говорит, что WebApp готово к взаимодействию
+        Telegram.WebApp.ready(); // Инициализация WebApp
+        Telegram.WebApp.expand(); // Разворачиваем WebApp
 
-        // После этого можно выполнить другие действия, например, развернуть приложение
-        Telegram.WebApp.expand(); // Раскрывает WebApp, если оно еще не развернуто
+        const startParam = Telegram.WebApp.initDataUnsafe?.start_param;
 
-        // Пример проверки start_param и выполнения действий
-        const startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        console.log("Получен start_param:", startParam); // Логируем параметр для отладки
+        console.log("Получен start_param:", startParam);
 
         if (startParam === "1") {
-            console.log("Открываем приложение для start_param = 1");
-
-            // Ваши действия, например, просто раскрытие приложения
-            Telegram.WebApp.expand();
+            console.log("Применяем поведение для start_param = 1");
+            // Никаких фильтров — просто показ всех карточек
+            activeTag = null;
+            filterAndSearch();
         }
     }
 });
 
-// Сброс фильтров
 resetBtn.addEventListener("click", () => {
     document
         .querySelectorAll(".tag-button")
@@ -167,5 +156,4 @@ resetBtn.addEventListener("click", () => {
     displayCards(knowledgeBase);
 });
 
-// Поиск при вводе
 searchInput.addEventListener("input", filterAndSearch);
