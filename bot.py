@@ -4,6 +4,10 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update
+import logging
+
+# Включаем подробное логирование
+logging.basicConfig(level=logging.DEBUG)
 
 TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
 CHANNEL_ID = "@testtestt23e"  # Ваш канал
@@ -25,23 +29,25 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text="📌 Нажми на кнопку, чтобы открыть базу знаний:",
             reply_markup=keyboard
         )
+
         await context.bot.pin_chat_message(chat_id=CHANNEL_ID, message_id=sent_msg.message_id)
         print("Сообщение отправлено и закреплено в канале")
+
     except Exception as e:
-        print(f"Ошибка при отправке сообщения: {e}")
-        print("URL мини-приложения: https://ignatova-e.github.io/mini_app_hoog/")
+        logging.error(f"Ошибка при отправке сообщения: {e}")
+        logging.error("Ответ Telegram API: ", exc_info=True)
         await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение в канал.")
 
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
-        keyboard = [
-            [InlineKeyboardButton(
+        keyboard = [[
+            InlineKeyboardButton(
                 "📚 База знаний", 
                 web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
-            )]
-        ]
+            )
+        ]]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         # Отправляем сообщение с кнопкой в личку
@@ -51,8 +57,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         print("Команда /start выполнена успешно")
     except Exception as e:
-        print(f"Ошибка при выполнении команды /start: {e}")
-        print("URL мини-приложения: https://ignatova-e.github.io/mini_app_hoog/")
+        logging.error(f"Ошибка при выполнении команды /start: {e}")
+        logging.error("Ответ Telegram API: ", exc_info=True)
 
 # Основная функция для запуска бота
 def main():
@@ -61,9 +67,6 @@ def main():
 
     # Подключаем команду /start
     app.add_handler(CommandHandler("start", start)) 
-
-    # Подключаем команду /pin
-    app.add_handler(CommandHandler("pin", send_and_pin))
 
     # Запуск бота
     app.run_polling()
