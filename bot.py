@@ -8,9 +8,32 @@ from telegram import Update
 TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
 CHANNEL_ID = "@testtestt23e"  # Убедитесь, что канал указан корректно и бот является администратором канала
 
-# Функция для отправки и закрепления сообщения с кнопкой на канале
-async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# Функция для отправки кнопки для лички (команда /start)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print("Received /start command")  # Логирование для диагностики
+    try:
+        # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
+        keyboard = InlineKeyboardMarkup([[
+            InlineKeyboardButton(
+                text="📚 База знаний", 
+                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")  # Убедитесь, что URL правильный
+            )
+        ]])
+
+        # Отправляем сообщение с кнопкой в личку
+        await update.message.reply_text(
+            text="📌 Нажми на кнопку, чтобы открыть базу знаний:",
+            reply_markup=keyboard
+        )
+        print("Сообщение отправлено в личку")
+
+    except Exception as e:
+        print(f"Ошибка при отправке сообщения: {e}")
+        await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение.")
+
+# Функция для отправки и закрепления сообщения в канале (команда /pin)
+async def pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print("Received /pin command")  # Логирование для диагностики
     try:
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
         keyboard = InlineKeyboardMarkup([[
@@ -39,8 +62,9 @@ def main():
     # Создаем приложение с токеном
     app = Application.builder().token(TOKEN).build()
 
-    # Подключаем команду /start
-    app.add_handler(CommandHandler("start", send_and_pin))
+    # Подключаем команды /start и /pin
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("pin", pin))
 
     # Запуск бота
     app.run_polling()
