@@ -6,16 +6,17 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update
 
 TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
-CHANNEL_ID = "@testtestt23e"
+CHANNEL_ID = "@testtestt23e"  # Убедитесь, что канал указан корректно и бот является администратором канала
 
 # Функция для отправки и закрепления сообщения с кнопкой на канале
 async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print("Received /start command")  # Логирование для диагностики
     try:
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
                 "📚 База знаний", 
-                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
+                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")  # Убедитесь, что URL правильный
             )
         ]])
 
