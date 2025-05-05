@@ -138,11 +138,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Обработка start_param после загрузки страницы и тегов
     if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
-        const startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        console.log("Получен start_param:", startParam);
+        const startapp = Telegram.WebApp.initDataUnsafe.start_param;
+        console.log("Получен start_param:", startapp);
 
-        if (startParam) {
-            activeTag = startParam; // допустим, ты передаешь прямо имя тега
+        if (startapp) {
+            activeTag = startapp; // допустим, ты передаешь прямо имя тега
             filterAndSearch();
 
             const tagBtn = [...document.querySelectorAll(".tag-button")].find(
