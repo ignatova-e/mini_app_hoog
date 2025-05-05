@@ -49,15 +49,26 @@
                 // Инициализация Web App
                 Telegram.WebApp.init();
 
-                // Пример работы с основной кнопкой Telegram (например, для закрытия приложения)
+                // Обработка событий, например, при нажатии на основную кнопку
+                Telegram.WebApp.onEvent("mainButtonClicked", function () {
+                    console.log("Main button clicked!");
+                });
+
+                // Настроим основную кнопку Telegram
                 Telegram.WebApp.MainButton.show();
                 Telegram.WebApp.MainButton.setParams({
                     text: "Закрыть приложение",
                 });
 
+                // Закрытие мини-приложения по клику на основную кнопку
                 Telegram.WebApp.MainButton.onClick(function () {
-                    Telegram.WebApp.close(); // Закрывает мини-приложение
+                    Telegram.WebApp.close();
                 });
+
+                // Если приложение открыто внутри Telegram, можно скрыть кнопку
+                if (Telegram.WebApp.isExpanded) {
+                    Telegram.WebApp.MainButton.hide();
+                }
             };
         </script>
     </body>
