@@ -51,6 +51,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("Команда /start выполнена успешно")
     except Exception as e:
         print(f"Ошибка при выполнении команды /start: {e}")
+        print("URL мини-приложения: https://ignatova-e.github.io/mini_app_hoog/")
 
 # Основная функция для запуска бота
 def main():
