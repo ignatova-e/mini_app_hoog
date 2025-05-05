@@ -4,13 +4,9 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update
-import logging
-
-# Включаем подробное логирование
-logging.basicConfig(level=logging.DEBUG)
 
 TOKEN = "7257113754:AAEH7m3Fu0eOOMzmNB3Kgz4mtk6j7a33sGA"
-CHANNEL_ID = "@testtestt23e"  # Ваш канал
+CHANNEL_ID = "@testtestt23e"
 
 # Функция для отправки и закрепления сообщения с кнопкой на канале
 async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -34,31 +30,8 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("Сообщение отправлено и закреплено в канале")
 
     except Exception as e:
-        logging.error(f"Ошибка при отправке сообщения: {e}")
-        logging.error("Ответ Telegram API: ", exc_info=True)
+        print(f"Ошибка при отправке сообщения: {e}")
         await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение в канал.")
-
-# Функция для команды /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    try:
-        # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
-        keyboard = [[
-            InlineKeyboardButton(
-                "📚 База знаний", 
-                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
-            )
-        ]]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-
-        # Отправляем сообщение с кнопкой в личку
-        await update.message.reply_text(
-            "Салют, мой дорогой Незнайка! 🤗\nСпециально для тебя мы подготовили базу знаний по приложению, чекай кнопку ниже ⬇️",
-            reply_markup=reply_markup
-        )
-        print("Команда /start выполнена успешно")
-    except Exception as e:
-        logging.error(f"Ошибка при выполнении команды /start: {e}")
-        logging.error("Ответ Telegram API: ", exc_info=True)
 
 # Основная функция для запуска бота
 def main():
@@ -66,7 +39,7 @@ def main():
     app = Application.builder().token(TOKEN).build()
 
     # Подключаем команду /start
-    app.add_handler(CommandHandler("start", start)) 
+    app.add_handler(CommandHandler("start", send_and_pin))
 
     # Запуск бота
     app.run_polling()
