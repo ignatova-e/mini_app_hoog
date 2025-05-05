@@ -1,31 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>База знаний</title>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>База знаний</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-</head>
+    <body>
+        <h1>База знаний</h1>
 
-<body>
-    <!-- Заголовок базы знаний -->
-    <h1>База знаний</h1>
+        <!-- Поиск -->
+        <input
+            type="text"
+            id="search-input"
+            placeholder="Поиск по ключевым словам..."
+        />
 
-    <!-- Поле для поиска -->
-    <input type="text" id="searchInput" placeholder="Поиск по ключевым словам..." />
+        <!-- Фильтр по тегам -->
+        <div id="tag-filter" class="tag-filter"></div>
 
-    <!-- Фильтр по тегам -->
-    <div id="tagFilter" class="tag-filter"></div>
+        <!-- Кнопка сброса фильтра -->
+        <button id="reset-btn">Сбросить фильтры</button>
 
-    <!-- Контейнер для карточек -->
-    <div id="card-container"></div>
+        <!-- Карточки -->
+        <div id="card-container"></div>
 
-    <!-- Подключаем файлы JS -->
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-</body>
-
+        <!-- Подключение скриптов -->
+        <script src="data.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>
