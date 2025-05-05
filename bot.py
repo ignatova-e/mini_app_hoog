@@ -29,6 +29,7 @@ async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("Сообщение отправлено и закреплено в канале")
     except Exception as e:
         print(f"Ошибка при отправке сообщения: {e}")
+        print("URL мини-приложения: https://ignatova-e.github.io/mini_app_hoog/")
         await update.message.reply_text("Что-то пошло не так при попытке отправить сообщение в канал.")
 
 # Функция для команды /start
