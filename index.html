@@ -1,13 +1,17 @@
 <!doctype html>
 <html lang="ru">
     <head>
+        <!-- Подключение скрипта для Telegram Web App SDK -->
         <script
             async
             src="https://telegram.org/js/telegram-web-app.js"
         ></script>
+
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>База знаний</title>
+
+        <!-- Подключение стилей -->
         <link rel="stylesheet" href="style.css" />
         <link
             href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
@@ -35,14 +39,25 @@
         <!-- Карточки -->
         <div id="card-container"></div>
 
-        <!-- Подключение скриптов -->
+        <!-- Подключение скриптов для данных и логики -->
         <script src="data.js"></script>
         <script src="script.js"></script>
 
-        <!-- Инициализация Telegram Web App -->
+        <!-- Инициализация Telegram Web App SDK -->
         <script>
             window.onload = function () {
-                Telegram.WebApp.init(); // Инициализация Web App
+                // Инициализация Web App
+                Telegram.WebApp.init();
+
+                // Пример работы с основной кнопкой Telegram (например, для закрытия приложения)
+                Telegram.WebApp.MainButton.show();
+                Telegram.WebApp.MainButton.setParams({
+                    text: "Закрыть приложение",
+                });
+
+                Telegram.WebApp.MainButton.onClick(function () {
+                    Telegram.WebApp.close(); // Закрывает мини-приложение
+                });
             };
         </script>
     </body>

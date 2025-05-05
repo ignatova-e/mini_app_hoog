@@ -12,12 +12,12 @@ CHANNEL_ID = "@testtestt23e"  # Ваш канал
 async def send_and_pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         # Создаем клавиатуру с кнопкой, ведущей на мини-приложение
-        keyboard = InlineKeyboardMarkup([[
+        keyboard = [[
             InlineKeyboardButton(
                 "📚 База знаний", 
-                web_app=WebAppInfo(url="https://ignatova-e.github.io/mini_app_hoog/")
+                web_app=WebAppInfo(url="https://yourwebsite.com/your_app_path")
             )
-        ]])
+        ]]
 
         # Отправляем сообщение в канал и закрепляем его
         sent_msg = await context.bot.send_message(
