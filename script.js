@@ -152,7 +152,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Ваш код для обработки start_param
         if (startParam === "1") {
             console.log("Открываем приложение для start_param = 1");
-
+            Telegram.WebApp.ready();
             Telegram.WebApp.expand();
         } else {
             console.log(
