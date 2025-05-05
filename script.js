@@ -138,29 +138,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Обработка start_param после загрузки страницы и тегов
     if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
+        Telegram.WebApp.ready(); // Говорит, что WebApp готово к взаимодействию
+
+        // После этого можно выполнить другие действия, например, развернуть приложение
+        Telegram.WebApp.expand(); // Раскрывает WebApp, если оно еще не развернуто
+
+        // Пример проверки start_param и выполнения действий
         const startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        console.log("Получен start_param:", startParam);
+        console.log("Получен start_param:", startParam); // Логируем параметр для отладки
 
-        // Проверка значения параметра
-        if (startParam) {
-            console.log("start_param передан, его значение:", startParam);
-        } else {
-            console.log("start_param не был передан");
-        }
-
-        // Ваш код для обработки start_param
         if (startParam === "1") {
             console.log("Открываем приложение для start_param = 1");
-            Telegram.WebApp.ready();
-            Telegram.WebApp.expand();
-        } else {
-            console.log(
-                "Не найден нужный параметр start_param или параметр имеет другое значение",
-            );
-        }
 
-        Telegram.WebApp.expand();
+            // Ваши действия, например, просто раскрытие приложения
+            Telegram.WebApp.expand();
+        }
     }
 });
 
