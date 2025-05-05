@@ -138,6 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Обработка start_param после загрузки страницы и тегов
     if (window.Telegram && Telegram.WebApp) {
+        console.log(Telegram.WebApp.initData);
         Telegram.WebApp.ready(); // Говорит, что WebApp готово к взаимодействию
 
         // После этого можно выполнить другие действия, например, развернуть приложение

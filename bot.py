@@ -39,7 +39,7 @@ async def pin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
                 text="📚 База знаний", 
-                url = "https://t.me/KBHoogBot?startapp=1"
+                web_app=WebAppInfo(url = "https://t.me/KBHoogBot?startapp=1")
             )
         ]])
 
