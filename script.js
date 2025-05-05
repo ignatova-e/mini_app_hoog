@@ -148,6 +148,22 @@ searchInput.addEventListener("input", filterAndSearch);
 // Telegram WebApp
 if (window.Telegram && Telegram.WebApp) {
     Telegram.WebApp.ready();
+    const startParam = Telegram.WebApp.initDataUnsafe.start_param;
+    console.log("Получен start_param:", startParam);
+
+    // Пример действия на основе параметра:
+    if (startParam === "1") {
+        // Автоматически выбираем нужный тег, фильтруем карточки
+        activeTag = "exampleTag"; // замени на тег, который ты хочешь показать
+        filterAndSearch();
+
+        // Можно также выделить кнопку тега, если нужно
+        const tagBtn = [...document.querySelectorAll(".tag-button")].find(
+            (btn) => btn.textContent === activeTag,
+        );
+        if (tagBtn) tagBtn.classList.add("active");
+    }
+
     Telegram.WebApp.expand();
 }
 
