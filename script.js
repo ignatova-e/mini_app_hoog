@@ -151,10 +151,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // Ваш код для обработки start_param
         if (startParam === "1") {
-            // Выполняем действия в зависимости от параметра
             console.log("Применяем действия для start_param = 1");
-            // activeTag = "exampleTag"; // Например, применяем фильтр по тегу
-            filterAndSearch();
+
+            // Здесь можно просто показать все карточки (если фильтрация не требуется)
+            activeTag = null; // Убираем фильтры
+            filterAndSearch(); // Показать все карточки
         } else {
             console.log(
                 "Не найден нужный параметр start_param или параметр имеет другое значение",
