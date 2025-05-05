@@ -137,12 +137,15 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // Обработка start_param после загрузки страницы и тегов
-    if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
-        const startapp = Telegram.WebApp.initDataUnsafe.start_param;
-        console.log("Получен start_param:", startapp);
+    if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.ready();
+        const startParam = Telegram.WebApp.initDataUnsafe.start_param;
+        console.log("Получен start_param:", startParam);
 
-        if (startapp) {
-            activeTag = startapp; // допустим, ты передаешь прямо имя тега
+        // Ваш код для обработки start_param
+        if (startParam === "1") {
+            // Применение фильтра или любых других данных
+            activeTag = "exampleTag"; // замените на нужный тег
             filterAndSearch();
 
             const tagBtn = [...document.querySelectorAll(".tag-button")].find(
@@ -151,7 +154,6 @@ window.addEventListener("DOMContentLoaded", () => {
             if (tagBtn) tagBtn.classList.add("active");
         }
 
-        Telegram.WebApp.ready();
         Telegram.WebApp.expand();
     }
 });
